@@ -7,7 +7,7 @@ export const getEditorClass = (schema: Schema, resolvers: Resolver[], editors: {
     classname = resolver(schema);
     return classname && editors[classname];
   });
-  console.log('classname', schema, classname);
+  // console.log('classname', schema, classname);
 
   if (!classname) {
     console.error(new window.Error(`Unknown editor for schema ${JSON.stringify(schema)}`));
@@ -16,6 +16,7 @@ export const getEditorClass = (schema: Schema, resolvers: Resolver[], editors: {
 
   if (!editors[classname]) {
     console.error(new window.Error(`Unknown editor  ${classname}`));
+    return undefined;
   }
 
   return editors[classname];

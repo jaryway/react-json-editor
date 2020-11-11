@@ -16,7 +16,10 @@ JSON editor for react
 > 2. [x] 依赖项显示/隐藏;
 > 3. [x] 支持数组
 > 4. [x] 支持对象嵌套;
-> 5. [ ] 主题???;
+> 5. [ ] 显示默认值;
+> 6. [ ] 主题???;
+> 7. [ ] title属性为 undefined 不显示;
+
 
 ### async-validator
 

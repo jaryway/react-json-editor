@@ -16,96 +16,96 @@ body {
   background-color: #fafafa;
 }
 
-a,
-.link-btn {
-  color: @link-color;
-  text-decoration: @link-decoration;
-  background-color: transparent; // remove the gray background on active links in IE 10.
-  outline: none;
-  cursor: pointer;
-  transition: color 0.3s;
-  -webkit-text-decoration-skip: objects; // remove gaps in links underline in iOS 8+ and Safari 8+.
+// a,
+// .link-btn {
+//   color: @link-color;
+//   text-decoration: @link-decoration;
+//   background-color: transparent; // remove the gray background on active links in IE 10.
+//   outline: none;
+//   cursor: pointer;
+//   transition: color 0.3s;
+//   -webkit-text-decoration-skip: objects; // remove gaps in links underline in iOS 8+ and Safari 8+.
 
-  &:hover {
-    color: @link-hover-color;
-  }
+//   &:hover {
+//     color: @link-hover-color;
+//   }
 
-  &:active {
-    color: @link-active-color;
-  }
+//   &:active {
+//     color: @link-active-color;
+//   }
 
-  &:active,
-  &:hover {
-    text-decoration: @link-hover-decoration;
-    outline: 0;
-  }
+//   &:active,
+//   &:hover {
+//     text-decoration: @link-hover-decoration;
+//     outline: 0;
+//   }
 
-  &[disabled] {
-    color: @disabled-color;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-}
-.link-btn {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  text-decoration: underline;
-  display: inline;
-  margin: 0;
-  padding: 0;
-  outline: none;
-  text-decoration: none;
-  &:hover,
-  &:focus {
-    text-decoration: none;
-  }
-}
+//   &[disabled] {
+//     color: @disabled-color;
+//     cursor: not-allowed;
+//     pointer-events: none;
+//   }
+// }
+// .link-btn {
+//   background-color: transparent;
+//   border: none;
+//   cursor: pointer;
+//   text-decoration: underline;
+//   display: inline;
+//   margin: 0;
+//   padding: 0;
+//   outline: none;
+//   text-decoration: none;
+//   &:hover,
+//   &:focus {
+//     text-decoration: none;
+//   }
+// }
 
-/*----------基础样式 end-------------*/
+// /*----------基础样式 end-------------*/
 
-.example {
-  &-jsonviewer {
-    &-bd {
-      background-color: #fff;
-      width: 780px + 16px;
-      margin: 0 auto;
-      height: 100%;
-      // padding: 16px 8px;
-    }
-    .fregata-json-editor,
-    textarea {
-      width: 100%;
-      height: calc(100% - 56px);
-      background-color: #f5f5f5;
-      padding: 8px;
-      margin: 0;
-      border: #e8e8e8;
-    }
-  }
+// .example {
+//   &-jsonviewer {
+//     &-bd {
+//       background-color: #fff;
+//       width: 780px + 16px;
+//       margin: 0 auto;
+//       height: 100%;
+//       // padding: 16px 8px;
+//     }
+//     .fregata-json-editor,
+//     textarea {
+//       width: 100%;
+//       height: calc(100% - 56px);
+//       background-color: #f5f5f5;
+//       padding: 8px;
+//       margin: 0;
+//       border: #e8e8e8;
+//     }
+//   }
 
-  &-preview {
-    &-bd {
-      background-color: #fff;
-      width: 780px + 16px;
-      margin: 0 auto;
-      padding: 16px 8px;
-    }
+//   &-preview {
+//     &-bd {
+//       background-color: #fff;
+//       width: 780px + 16px;
+//       margin: 0 auto;
+//       padding: 16px 8px;
+//     }
 
-    &-operations {
-      // padding: 0 0 8px;
-      .ant-btn,
-      .ant-btn-group,
-      .ant-upload.ant-upload-select {
-        margin-right: 8px;
-        margin-bottom: 8px;
-      }
-      .ant-btn-group {
-        .ant-btn {
-          margin-right: 0;
-          margin-bottom: 0;
-        }
-      }
-    }
-  }
-}
+//     &-operations {
+//       // padding: 0 0 8px;
+//       .ant-btn,
+//       .ant-btn-group,
+//       .ant-upload.ant-upload-select {
+//         margin-right: 8px;
+//         margin-bottom: 8px;
+//       }
+//       .ant-btn-group {
+//         .ant-btn {
+//           margin-right: 0;
+//           margin-bottom: 0;
+//         }
+//       }
+//     }
+//   }
+// }
