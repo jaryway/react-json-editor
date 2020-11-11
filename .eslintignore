@@ -1,0 +1,7 @@
+build/*.js
+config/*.js
+scripts/*.js
+es/
+lib/
+node_modules/
+example
