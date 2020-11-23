@@ -3,12 +3,14 @@ import { List } from 'rc-field-form';
 import classNames from 'classnames';
 // import Schema, { Rules } from 'async-validator';
 import { FormComponentProps } from 'antd/lib/form';
-
+import { getNamePath } from 'rc-field-form/es/utils/valueUtil';
 import * as editors from './index';
 
 import { Schema } from '../interfaces';
 import JsonEditorFormContext from '../JsonEditorFormContext';
 import { Button } from 'antd';
+import { Rule } from 'rc-field-form/es/interface';
+import { getRules } from 'rules';
 
 interface ArrayEditorProps extends FormComponentProps {
   path?: string[];
@@ -19,45 +21,32 @@ const ArrayEditor: React.FC<ArrayEditorProps> = ({ schema, path }) => {
   const { root, hiddenMap } = useContext(JsonEditorFormContext);
   const items: Schema = schema.items || ({} as Schema);
   const Component = (editors as any)[(items || ({} as any)).type as string];
+  const mergedRules: Rule[] = [...(getRules(schema, getNamePath(name || [])) || [])];
 
   (items as any).parent = schema;
-  if (schema.format === 'table') {
+  if ((schema.format || 'table') === 'table') {
     (items as any).format = 'table_row';
   }
 
-  // console.log('assdsdfasd', items);
+  // console.log('mergedRules', mergedRules, schema);
 
   // React.useEffect(() => {
   //   console.log('mount.ArrayEditor');
   // }, []);
 
+  // if (hiddenMap && hiddenMap[getNamePath(name || []).join('.')]) return null;
+
   return (
-    <List
-      validateTrigger='onChange'
-      name={path || root || []}
-      rules={[
-        {
-          type: 'array',
-          required: true,
-          // defaultField: {
-          //   type: 'object',
-          //   required: true,
-          //   // fields: {
-          //   //   value: { type: 'string', required: true },
-          //   // },
-          // },
-        } as any,
-      ]}
-    >
+    <List validateTrigger='onChange' name={path || root || []} rules={mergedRules as any}>
       {(fields, { add, remove, move }, { errors, ...meta }) => {
-        // console.log('fieldfield', errors);
+        console.log('fieldfield', errors);
 
         return (
           <div className='je-array-item ant-card ant-card-bordered ant-card-small'>
             {items.title && (
               <div className='ant-card-head' style={{ borderBottom: 0 }}>
                 <div className='ant-card-head-wrapper'>
-                  <label className='ant-card-head-title'>{items.title}</label>
+                  <label className='ant-card-head-title'>{schema.title}</label>
                 </div>
               </div>
             )}

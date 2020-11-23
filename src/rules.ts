@@ -46,23 +46,35 @@ const string = (schema: Schema, classname: string, name: InternalNamePath) => {
 
 const array = (schema: Schema, classname: string) => {
   const rules: Rule[] = [];
-  const { minItems, maxItems, uniqueItems } = schema;
-
+  const { minItems, maxItems, uniqueItems, uniqueItemFields } = schema;
+  // console.log('getRules-uniqueItems');
   if (classname !== 'array') return rules;
 
   if (minItems && minItems > 0) rules.push({ type: 'array', min: minItems });
   if (maxItems && maxItems > 0) rules.push({ type: 'array', max: maxItems });
 
   if (uniqueItems) {
+    // console.log('getRules-uniqueItems');
     rules.push({
       type: 'array',
       validator: (_, value, cb) => {
-        const seen: any = {};
+        console.log('getRules-validator', value);
 
-        for (let i = 0; i < value.length; i++) {
-          const valid = JSON.stringify(value[i]);
+        const seen: any = {};
+        const _value = (value || []).map((m: any) => {
+          // 只验证指定的字段
+          if (uniqueItemFields && uniqueItemFields.length > 0 && m !== undefined) {
+            let v: any = {};
+            uniqueItemFields.forEach((f) => (v[f] = m[f]));
+            return v;
+          }
+          return m;
+        });
+
+        for (let i = 0; i < _value.length; i++) {
+          const valid = JSON.stringify(_value[i]);
           if (seen[valid]) {
-            return cb('存在重复项');
+            return cb(`存在重复项`);
           }
           seen[valid] = true;
         }
@@ -75,7 +87,7 @@ const array = (schema: Schema, classname: string) => {
   return rules;
 };
 
-export const rules = [string, number, array];
+export const rules = [array, string, number];
 
 export const getRules = (schema: Schema, name: InternalNamePath) => {
   let classname: string | undefined;
@@ -84,13 +96,15 @@ export const getRules = (schema: Schema, name: InternalNamePath) => {
     classname = resolver(schema);
     return classname;
   });
-
+  // console.log('getRules', schema, classname);
   if (!classname) return [];
   let result: Rule[] = [];
 
+  // console.log('getRules11', schema, classname);
+
   rules.find((resolver) => {
     result = resolver(schema, classname as string, name);
-    return result;
+    if (result.length > 0) return result;
   });
 
   return result;

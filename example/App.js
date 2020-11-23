@@ -182,7 +182,7 @@ const App = () => {
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
-      setSchemas(() => mock.text);
+      setSchemas(() => mock.radio);
       setLoading(false);
     }, 500);
   }, []);
@@ -195,7 +195,7 @@ const App = () => {
       <Button
         type='primary'
         onClick={() => {
-          console.log(form.getFieldsValue());
+          console.log(form.validateFields());
         }}
       >
         Save

@@ -27,6 +27,7 @@ export interface Schema {
   minItems?: number; // 最小数组项目数
   maxItems?: number; // 最大数组项目数
   uniqueItems?: number; // 数组中的每一项是否必须唯一
+  uniqueItemFields?: string[]; // 当 uniqueItems 为 true 时。指定验证那些字段必须唯一
   /* 数组属性 end */
 
   description: string;

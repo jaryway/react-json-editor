@@ -4,7 +4,7 @@ import { Field } from 'rc-field-form';
 import { FieldProps } from 'rc-field-form/es/Field';
 import { getRules } from '../rules';
 import { Schema } from '../interfaces';
-import { Meta, FormInstance, Rule } from 'rc-field-form/es/interface';
+import { Meta, FormInstance, Rule, InternalNamePath } from 'rc-field-form/es/interface';
 import JsonEditorFormContext from '../JsonEditorFormContext';
 import { getNamePath } from 'rc-field-form/es/utils/valueUtil';
 
@@ -72,15 +72,19 @@ const Control: React.FC<ContolProps> = ({ control, meta, form, children, require
 
   const onChange = (...rest: any) => {
     const [event] = rest;
-
     notify && notify(meta.name, getValue(event));
-    return control.onChange(...rest);
+    control.onChange(...rest);
+    // console.log('xxxx', meta);
+    // 如果是数组子项，并且设置了子项唯一
+    if (schema.parent && schema.parent.parent && schema.parent.parent.uniqueItems) {
+      form.validateFields(meta.name.slice(0, -2));
+    }
   };
 
   useEffect(() => {
     const cancelRegisterField = registerField && registerField(meta.name, schema);
     return () => {
-      console.log('test.cancelRegisterField', meta.name);
+      // console.log('test.cancelRegisterField', meta.name);
       cancelRegisterField && cancelRegisterField(meta.name);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -122,8 +126,6 @@ const LabelField: React.FC<LabelFieldProps> = ({ name, label, children, schema, 
     //   console.log('test.labelfield.unmount');
     // };
   }, []);
-
-  // console.log('test.labelfield.render');
 
   if (hiddenMap && hiddenMap[getNamePath(name || []).join('.')]) return null;
 

@@ -10,11 +10,11 @@ interface HiddenEditorProps {
   schema: Schema;
 }
 
-const HiddenEditor: React.FC<HiddenEditorProps> = ({ schema, path, ...rest }) => {
+const HiddenEditor: React.FC<HiddenEditorProps> = ({ schema, path }) => {
   const { root } = React.useContext(JsonEditorFormContext);
   const fieldpath = path || root || [];
 
-  console.log('hidden', schema, rest);
+  // console.log('hidden', schema, rest);
   // React.useEffect(() => {
   //   console.log('mount.HiddenEditor');
   // }, []);
