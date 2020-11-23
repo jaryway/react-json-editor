@@ -4,7 +4,7 @@ import { Field } from 'rc-field-form';
 import { FieldProps } from 'rc-field-form/es/Field';
 import { getRules } from '../rules';
 import { Schema } from '../interfaces';
-import { Meta, FormInstance, Rule, InternalNamePath } from 'rc-field-form/es/interface';
+import { Meta, FormInstance, Rule } from 'rc-field-form/es/interface';
 import JsonEditorFormContext from '../JsonEditorFormContext';
 import { getNamePath } from 'rc-field-form/es/utils/valueUtil';
 
@@ -64,7 +64,7 @@ function getValue(event: any) {
   return event;
 }
 
-const Control: React.FC<ContolProps> = ({ control, meta, form, children, required, schema, label }) => {
+const Control: React.FC<ContolProps> = ({ control, meta, form, children, required, schema, label, ...rest }) => {
   const { notify, registerField } = useContext(JsonEditorFormContext);
   const needHtmlFor = schema.type === 'boolean' && schema.format === 'checkbox';
   const hasError = meta.errors.length;
@@ -80,6 +80,8 @@ const Control: React.FC<ContolProps> = ({ control, meta, form, children, require
       form.validateFields(meta.name.slice(0, -2));
     }
   };
+
+  console.log('test.jsonEditorFormContext.render2', meta.name);
 
   useEffect(() => {
     const cancelRegisterField = registerField && registerField(meta.name, schema);
@@ -126,7 +128,7 @@ const LabelField: React.FC<LabelFieldProps> = ({ name, label, children, schema, 
     //   console.log('test.labelfield.unmount');
     // };
   }, []);
-
+  // console.log('test.jsonEditorFormContext.render1', rest);
   if (hiddenMap && hiddenMap[getNamePath(name || []).join('.')]) return null;
 
   return (

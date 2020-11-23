@@ -26,49 +26,26 @@ export default {
       },
     },
 
-    remote: { type: 'boolean', title: '使用接口数据', format: 'checkbox' },
+    remote: { type: 'boolean', title: '使用接口数据', format: 'checkbox', default: false },
 
     options: {
       type: 'array',
       uniqueItems: true,
       uniqueItemFields: ['value'], // value 值必须唯一
-      title: 'Pets',
+      title: '选项',
       options: { dependencies: { remote: false } },
       items: {
         type: 'object',
         title: 'Pet',
         properties: {
           value: { type: 'string', title: '值' },
-          label: { type: 'string', title: '标签' },
+          label: { type: 'string', title: '标签', options: { dependencies: { showOptionLabel: true } } },
           checked: { type: 'boolean', format: 'select', title: '选中' },
-          // user: {
-          //   type: 'array',
-          //   format: 'table',
-          //   title: 'Pets',
-          //   uniqueItems: true,
-          //   items: {
-          //     type: 'object',
-          //     title: '选项',
-          //     properties: {
-          //       value: {
-          //         type: 'string',
-          //         // enum: ['cat', 'dog', 'bird', 'reptile', 'other'],
-          //         default: 'dog',
-          //       },
-          //       label: {
-          //         type: 'string',
-          //       },
-          //       checked: {
-          //         type: 'boolean',
-          //       },
-          //     },
-          //   },
-          // },
         },
       },
     },
 
-    showOptionLabel: {},
+    showOptionLabel: { type: 'boolean', title: '显示选项标签', format: 'checkbox', options: { dependencies: { remote: false } } },
   },
 
   /**

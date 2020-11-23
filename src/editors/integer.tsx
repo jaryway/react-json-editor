@@ -1,13 +1,13 @@
 import React from 'react';
 import { InputNumber } from 'antd';
-import { Schema } from '../interfaces';
+import { Schema, CommonEditorProps } from '../interfaces';
 // import { Field } from 'rc-field-form';
 import LabelField from '../components/LabelField';
 import JsonEditorFormContext from '../JsonEditorFormContext';
 
-interface IntegerEditorProps {
+interface IntegerEditorProps extends CommonEditorProps {
   title?: string;
-  path?: string[];
+  path: string[];
   schema: Schema;
 }
 

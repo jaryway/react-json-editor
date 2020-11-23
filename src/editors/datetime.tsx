@@ -1,13 +1,13 @@
 import React from 'react';
 import { DatePicker } from 'antd';
 
-import { Schema } from '../interfaces';
+import { Schema, CommonEditorProps } from '../interfaces';
 import LabelField from '../components/LabelField';
 import JsonEditorFormContext from '../JsonEditorFormContext';
 
-interface DateTimeProps {
+interface DateTimeProps extends CommonEditorProps {
   title?: string;
-  path?: string[];
+  path: string[];
   schema: Schema;
 }
 

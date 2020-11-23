@@ -45,3 +45,8 @@ export interface Schema {
 }
 
 export type Resolver = (schema: Schema) => string | undefined;
+
+export interface CommonEditorProps {
+  schema: Schema;
+  path: string[];
+}

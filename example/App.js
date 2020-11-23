@@ -195,7 +195,9 @@ const App = () => {
       <Button
         type='primary'
         onClick={() => {
-          console.log(form.validateFields());
+          form.validateFields().then((v) => {
+            console.log(v);
+          });
         }}
       >
         Save

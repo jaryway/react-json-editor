@@ -135,7 +135,7 @@ const JsonEditorFormProvider: React.FC<JsonEditorFormProviderProps> = ({ root = 
   //   };
   // }, []);
 
-  // console.log('test.jsonEditorFormContext.render', valueSet, hiddenState);
+  console.log('test.jsonEditorFormContext.render', { valueSet, hiddenState });
 
   return (
     <JsonEditorFormContext.Provider

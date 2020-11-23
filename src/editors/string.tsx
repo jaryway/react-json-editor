@@ -1,14 +1,14 @@
 import React from 'react';
 import { Input } from 'antd';
 
-import { Schema } from '../interfaces';
+import { Schema, CommonEditorProps } from '../interfaces';
 // import { getRules } from '../rules';
 import LabelField from '../components/LabelField';
 import JsonEditorFormContext from '../JsonEditorFormContext';
 
-interface StringEditorProps {
+interface StringEditorProps extends CommonEditorProps {
   title?: string;
-  path?: string[];
+  path: string[];
   schema: Schema;
 }
 
@@ -22,7 +22,7 @@ const StringEditor: React.FC<StringEditorProps> = ({ path, title, schema }) => {
     //   console.log('test.string.unmount');
     // };
   }, []);
-
+  console.log('test.string.path', path);
   return (
     <LabelField name={fieldpath} label={title} schema={schema}>
       {(control, meta) => {

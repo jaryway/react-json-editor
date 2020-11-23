@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import classnames from 'classnames';
-import { Schema } from '../interfaces';
+import { Schema, CommonEditorProps } from '../interfaces';
 // import { Field } from 'rc-field-form';
 // import * as editors from './index';
 import JsonEditorContext from '../JsonEditorContext';
 import { getEditorClass } from '../utils/editorUtil';
 import JsonEditorFormContext from '../JsonEditorFormContext';
 
-interface ObjectEditorProps {
+interface ObjectEditorProps extends CommonEditorProps {
   format?: string;
   path: string[];
   schema: Schema;
@@ -32,7 +32,7 @@ const Wrapper: React.FC<any> = ({ format, path, title, children }: any) => {
   );
 };
 
-const ChildWrapper: React.FC<any> = ({ format, children }: any) => {
+const ChildWrapper: React.FC<any> = ({ format, children }) => {
   const isTableRow = format === 'table_row';
 
   if (isTableRow) return <td className='je-object-item'>{children}</td>;
@@ -42,7 +42,7 @@ const ChildWrapper: React.FC<any> = ({ format, children }: any) => {
 
 const ObjectEditor: React.FC<ObjectEditorProps> = ({ schema, path = [] }) => {
   const { options } = useContext(JsonEditorContext);
-  const { root } = React.useContext(JsonEditorFormContext);
+  const { root, hiddenMap } = React.useContext(JsonEditorFormContext);
   const fieldpath = path || root || [];
   const { resolvers = [], editors } = options || {};
   const format = schema.format;
@@ -50,6 +50,7 @@ const ObjectEditor: React.FC<ObjectEditorProps> = ({ schema, path = [] }) => {
   // React.useEffect(() => {
   //   console.log('mount.ObjectEditor');
   // }, []);
+  // console.log('xxxxxxxxxxxxxx', rest);
 
   return (
     <Wrapper title={schema.title} format={format} path={fieldpath}>
@@ -57,9 +58,10 @@ const ObjectEditor: React.FC<ObjectEditorProps> = ({ schema, path = [] }) => {
         childSchema.parent = schema;
         const Component = getEditorClass(childSchema as Schema, resolvers || [], editors as { [k: string]: React.FC });
 
+        if (hiddenMap && hiddenMap[[...fieldpath, key].join('.')]) return null;
         return (
           <ChildWrapper format={format} key={key}>
-            {Component && <Component key={key} schema={childSchema} path={[...fieldpath, key]} title={childSchema.title || key} />}
+            {Component && <Component key={key} schema={childSchema} path={[...fieldpath.slice(-1), key]} title={childSchema.title || key} />}
           </ChildWrapper>
         );
       })}

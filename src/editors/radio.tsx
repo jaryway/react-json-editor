@@ -1,12 +1,12 @@
 import React from 'react';
 import { Radio } from 'antd';
-import { Schema } from '../interfaces';
+import { Schema, CommonEditorProps } from '../interfaces';
 import LabelField from '../components/LabelField';
 import JsonEditorFormContext from '../JsonEditorFormContext';
 
-interface RadioEditorProps {
+interface RadioEditorProps extends CommonEditorProps {
   title?: string;
-  path?: string[];
+  // path?: string[];
   schema: Schema;
 }
 
