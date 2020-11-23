@@ -50,7 +50,7 @@ const ArrayEditor: React.FC<ArrayEditorProps> = ({ schema, path }) => {
       ]}
     >
       {(fields, { add, remove, move }, { errors, ...meta }) => {
-        console.log('fieldfield', errors);
+        // console.log('fieldfield', errors);
 
         return (
           <div className='je-array-item ant-card ant-card-bordered ant-card-small'>

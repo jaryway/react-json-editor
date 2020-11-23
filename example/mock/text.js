@@ -4,12 +4,12 @@ export default {
   hidden: ['id'], // 隐藏的字段
 
   properties: {
-    id: { type: 'string', title: 'ID' },
+    id: { type: 'string', title: 'ID', default: '1' },
     key: { type: 'string', title: '字段标识(KEY)' },
     name: { type: 'string', title: '标题' },
     type: {
       type: 'string',
-      title: '布局',
+      title: '类型',
       default: 'text',
       format: 'select',
 
@@ -19,24 +19,25 @@ export default {
         enum_titles: ['文本', '多行文本'],
       },
     },
+    autoSize: {
+      type: 'boolean',
+      title: '高度自增',
+      format: 'checkbox',
+      options: {
+        dependencies: {
+          type: 'textarea',
+          id: '1',
+        },
+      },
+    },
 
-    showLabel: { type: 'boolean', title: '显示控件标题' }, //
+    showLabel: { type: 'boolean', title: '显示控件标题', format: 'checkbox' }, //
     hidden: { type: 'boolean', title: '是否隐藏' }, //
     disabled: { type: 'boolean', title: '是否禁用' }, //
     required: { type: 'boolean', title: '是否填项' }, // 对应的 message 必填项
     pattern: { type: 'string', title: undefined }, // 对应的 message 格式错误
     maxLength: { type: 'number', title: '最大长度' }, // 最大长度
     minLength: { type: 'number', title: '最小长度' }, // 最小长度
-    autoSize: {
-      type: 'boolean',
-      title: '高度自增',
-      format: 'select',
-      options: {
-        dependencies: {
-          type: 'textarea',
-        },
-      },
-    },
 
     defaultValue: { type: 'string', title: '默认值' },
     placeholder: { type: 'string', title: '输入提示', default: '请输入' },

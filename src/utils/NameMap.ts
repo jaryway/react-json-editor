@@ -18,10 +18,7 @@ class NameMap<T> {
     if (index !== -1) {
       this.list[index].value = value;
     } else {
-      this.list.push({
-        key,
-        value,
-      });
+      this.list.push({ key, value });
     }
   }
 

@@ -10,13 +10,7 @@ export interface JsonEditorProviderProps {
   };
 }
 
-export interface JsonEditorContextProps extends JsonEditorProviderProps {
-  // notify?: (path: InternalNamePath, value: any) => void;
-  // // 字段集合
-  // fieldKeySet?: InternalNamePath[];
-  // registerField?: (path: InternalNamePath, schema: Schema) => (path: InternalNamePath) => void;
-  // hiddenMap: { [k: string]: boolean };
-}
+export interface JsonEditorContextProps extends JsonEditorProviderProps {}
 
 const JsonEditorContext = React.createContext<JsonEditorContextProps>({ options: { resolvers: [], editors: {} } });
 
@@ -35,7 +29,7 @@ const JsonEditorProvider: React.FC<JsonEditorProviderProps> = ({ children, optio
   }
 
   useEffect(() => {
-    console.log('___json.context.ready');
+    // console.log('test1.jsonEditorContext.mount');
   }, []);
 
   return (

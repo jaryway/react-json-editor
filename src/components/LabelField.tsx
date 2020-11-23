@@ -80,7 +80,7 @@ const Control: React.FC<ContolProps> = ({ control, meta, form, children, require
   useEffect(() => {
     const cancelRegisterField = registerField && registerField(meta.name, schema);
     return () => {
-      console.log('___path.cancelRegisterField', meta.name);
+      console.log('test.cancelRegisterField', meta.name);
       cancelRegisterField && cancelRegisterField(meta.name);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -93,8 +93,6 @@ const Control: React.FC<ContolProps> = ({ control, meta, form, children, require
       ? children(ctrl, meta, form)
       : React.cloneElement(children as React.ReactElement, { ...ctrl });
   // console.log('___handlers.schema', schema);
-
-  if (hiddenMap && hiddenMap[meta.name.join('.')]) return null;
 
   // 适配 antd 3.x
   return (
@@ -117,11 +115,23 @@ const Control: React.FC<ContolProps> = ({ control, meta, form, children, require
 };
 
 const LabelField: React.FC<LabelFieldProps> = ({ name, label, children, schema, rules, ...rest }) => {
+  const { hiddenMap } = useContext(JsonEditorFormContext);
   const mergedRules: Rule[] = [...(getRules(schema, getNamePath(name || [])) || []), ...(rules || [])];
   const required = mergedRules.some((rule: any) => rule.required);
 
+  React.useEffect(() => {
+    // console.log('test.labelfield.mount');
+    // return () => {
+    //   console.log('test.labelfield.unmount');
+    // };
+  }, []);
+
+  // console.log('test.labelfield.render');
+
+  // if (!checkVisible(getNamePath(name || []))) return null;
+  if (hiddenMap && hiddenMap[getNamePath(name || []).join('.')]) return null;
   return (
-    <Field name={name} rules={mergedRules} {...rest}>
+    <Field name={name} rules={mergedRules} initialValue={schema.default} {...rest}>
       {(control, meta, form) => {
         // console.log('LabelFieldLabelField', control, meta, form);
         return <Control {...{ control, meta, form, required, schema, label, children }} />;
@@ -130,4 +140,4 @@ const LabelField: React.FC<LabelFieldProps> = ({ name, label, children, schema, 
   );
 };
 
-export default React.memo(LabelField);
+export default LabelField;

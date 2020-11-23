@@ -12,7 +12,6 @@ import 'antd/lib/card/style/index.less';
 import 'antd/lib/table/style/index.less';
 import 'style';
 
-
 interface JsonEditorProps {
   //   Provider: typeof Provider;
   root?: string[];
@@ -22,9 +21,11 @@ interface JsonEditorProps {
   onChange: (v: { name: string; city: string }[]) => void;
 }
 
+
 const InterbalJsonEditor: React.ForwardRefRenderFunction<unknown, JsonEditorProps> = ({ schema, value, form, root, onChange }, ref) => {
   const { options } = useContext(JsonEditorContext);
   // const { fieldKeySet } = useContext(JsonEditorFormContext);
+
   const { resolvers, editors } = options;
   const EditorComponent = getEditorClass(schema as Schema, resolvers, editors);
 
@@ -32,10 +33,8 @@ const InterbalJsonEditor: React.ForwardRefRenderFunction<unknown, JsonEditorProp
   useImperativeHandle(ref, () => {});
 
   useEffect(() => {
-    console.log('___json.editor.ready');
+    // console.log('test1.editor.mount');
   }, []);
-
-  // console.log('___json.render');
 
   return (
     <JsonEditorFormProvider form={form} root={root || []}>

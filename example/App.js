@@ -4,6 +4,7 @@ import JsonEditor, { Provider as JsonEditorProvider } from '../src';
 import * as mock from './mock';
 
 import './style';
+import { Button } from 'antd';
 
 const defaultSchemas = {
   type: 'object',
@@ -183,13 +184,22 @@ const App = () => {
     setTimeout(() => {
       setSchemas(() => mock.text);
       setLoading(false);
-    }, 1500);
+    }, 500);
   }, []);
 
   const [form] = Form.useForm();
+  console.log(form.getFieldsValue());
 
   return (
     <>
+      <Button
+        type='primary'
+        onClick={() => {
+          console.log(form.getFieldsValue());
+        }}
+      >
+        Save
+      </Button>
       <div style={{ display: 'block', clear: 'both', margin: 24 }}>
         <JsonEditorProvider
           options={{
@@ -198,7 +208,7 @@ const App = () => {
         >
           <JsonEditor
             form={form}
-            value={{ root: { remote: true } }}
+            value={values}
             onChange={(changedValue) => {
               console.log('___onChange', changedValue);
               setValue(changedValue);

@@ -16,12 +16,15 @@ const StringEditor: React.FC<StringEditorProps> = ({ path, title, schema }) => {
   const { root } = React.useContext(JsonEditorFormContext);
   const fieldpath = path || root || [];
 
-  // React.useEffect(() => {
-  //   console.log('mount.string');
-  // }, []);
+  React.useEffect(() => {
+    // console.log('test.string.mount');
+    // return () => {
+    //   console.log('test.string.unmount');
+    // };
+  }, []);
 
   return (
-    <LabelField name={fieldpath} label={title} schema={schema}>
+    <LabelField name={fieldpath} label={title} initialValue={schema.default} schema={schema}>
       {(control, meta) => {
         return <Input {...control} data-schemapath={meta.name.join('.')} />;
       }}
