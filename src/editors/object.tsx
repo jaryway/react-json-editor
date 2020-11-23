@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import classnames from 'classnames';
 import { Schema, CommonEditorProps } from '../interfaces';
 // import { Field } from 'rc-field-form';
@@ -42,10 +42,19 @@ const ChildWrapper: React.FC<any> = ({ format, children }) => {
 
 const ObjectEditor: React.FC<ObjectEditorProps> = ({ schema, path = [] }) => {
   const { options } = useContext(JsonEditorContext);
-  const { root, hiddenMap } = React.useContext(JsonEditorFormContext);
+  const { root, hiddenMap, registerField } = React.useContext(JsonEditorFormContext);
   const fieldpath = path || root || [];
   const { resolvers = [], editors } = options || {};
   const format = schema.format;
+
+  useEffect(() => {
+    const cancelRegisterField = registerField && registerField(fieldpath, schema);
+    return () => {
+      // console.log('test.cancelRegisterField', meta.name);
+      cancelRegisterField && cancelRegisterField(fieldpath);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // React.useEffect(() => {
   //   console.log('mount.ObjectEditor');

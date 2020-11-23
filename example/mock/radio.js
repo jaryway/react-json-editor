@@ -27,7 +27,7 @@ export default {
     },
 
     remote: { type: 'boolean', title: '使用接口数据', format: 'checkbox', default: false },
-
+    showOptionLabel: { type: 'boolean', title: '显示选项标签', format: 'checkbox', options: { dependencies: { remote: false } } },
     options: {
       type: 'array',
       uniqueItems: true,
@@ -44,8 +44,13 @@ export default {
         },
       },
     },
-
-    showOptionLabel: { type: 'boolean', title: '显示选项标签', format: 'checkbox', options: { dependencies: { remote: false } } },
+    remoteUrl: { type: 'url', format: 'url', title: 'API 地址', options: { dependencies: { remote: true } } },
+    props: {
+      type: 'object',
+      title: 'api 属性映射',
+      options: { dependencies: { remote: true } },
+      properties: { value: { type: 'string', title: '值属性', default: 'value' }, label: { type: 'string', title: '显示属性', default: 'label' } },
+    },
   },
 
   /**
