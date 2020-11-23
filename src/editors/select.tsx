@@ -36,7 +36,7 @@ const SelectEditor: React.FC<SelectEditorProps> = ({ schema, path, title }) => {
   }
 
   return (
-    <LabelField name={fieldpath} label={title}  initialValue={schema.default} schema={schema}>
+    <LabelField name={fieldpath} label={title} schema={schema}>
       {(control) => {
         return (
           <Select {...control}>

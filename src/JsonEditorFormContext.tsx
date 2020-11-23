@@ -12,7 +12,6 @@ export interface JsonEditorFormProviderProps {
   // dependencySet?: NameMap<{ [k: string]: any }>;
   // visibleSet?: NameMap<NameMap<{ expect: any | any[]; value: any }>>;
   // fieldKeySet?: InternalNamePath[];
-  hiddenMap: { [k: string]: boolean };
 }
 
 export interface JsonEditorFormContextProps extends JsonEditorFormProviderProps {
@@ -20,6 +19,7 @@ export interface JsonEditorFormContextProps extends JsonEditorFormProviderProps 
   // // 字段集合
   // fieldKeySet?: InternalNamePath[];
   // checkVisible: (path: InternalNamePath) => boolean;
+  hiddenMap: { [k: string]: boolean };
   registerField?: (path: InternalNamePath, schema: Schema) => (path: InternalNamePath) => void;
 }
 

@@ -30,6 +30,8 @@ const arraysOfStrings: Resolver = (schema: Schema) => {
 /* If the type is set and it's a basic type, use the primitive editor */
 const number: Resolver = (schema: Schema) => (typeof schema.type === 'string' && schema.type === 'number' ? 'integer' : undefined);
 
+const hidden: Resolver = (schema: Schema) => (typeof schema.type === 'string' && schema.format === 'hidden' ? 'hidden' : undefined);
+
 /* Use the select editor for all boolean values */
 const boolean: Resolver = (schema: Schema) => {
   if (schema.type === 'boolean') {
@@ -60,4 +62,4 @@ const enumeratedProperties: Resolver = (schema: Schema) => {
 };
 
 // 基本数据对象 string、number、null、undefined
-export const resolvers = [number, boolean, arraysOfStrings, enumeratedProperties, primitive, object, defaultResolver];
+export const resolvers = [number, boolean, hidden, arraysOfStrings, enumeratedProperties, primitive, object, defaultResolver];

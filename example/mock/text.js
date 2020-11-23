@@ -4,7 +4,7 @@ export default {
   hidden: ['id'], // 隐藏的字段
 
   properties: {
-    id: { type: 'string', title: 'ID', default: '1' },
+    id: { type: 'string', title: 'ID', default: '1', format: 'hidden' },
     key: { type: 'string', title: '字段标识(KEY)' },
     name: { type: 'string', title: '标题' },
     type: {

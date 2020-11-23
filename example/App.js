@@ -176,7 +176,7 @@ const defaultSchemas = {
 
 const App = () => {
   const [loading, setLoading] = useState(true);
-  const [values, setValue] = useState({});
+  const [values, setValue] = useState({ id: '1212' });
   const [schemas, setSchemas] = useState({});
 
   useEffect(() => {

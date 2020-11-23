@@ -65,7 +65,7 @@ function getValue(event: any) {
 }
 
 const Control: React.FC<ContolProps> = ({ control, meta, form, children, required, schema, label }) => {
-  const { notify, registerField, hiddenMap } = useContext(JsonEditorFormContext);
+  const { notify, registerField } = useContext(JsonEditorFormContext);
   const needHtmlFor = schema.type === 'boolean' && schema.format === 'checkbox';
   const hasError = meta.errors.length;
   const format = schema.parent?.format;
@@ -86,13 +86,10 @@ const Control: React.FC<ContolProps> = ({ control, meta, form, children, require
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const ctrl = { ...control, onChange };
+  if (children === undefined) return null;
 
-  const childNode =
-    typeof children === 'function' //
-      ? children(ctrl, meta, form)
-      : React.cloneElement(children as React.ReactElement, { ...ctrl });
-  // console.log('___handlers.schema', schema);
+  const ctrl = { ...control, onChange };
+  const childNode = typeof children === 'function' ? children(ctrl, meta, form) : React.cloneElement(children as React.ReactElement, { ...ctrl });
 
   // 适配 antd 3.x
   return (
@@ -128,8 +125,8 @@ const LabelField: React.FC<LabelFieldProps> = ({ name, label, children, schema, 
 
   // console.log('test.labelfield.render');
 
-  // if (!checkVisible(getNamePath(name || []))) return null;
   if (hiddenMap && hiddenMap[getNamePath(name || []).join('.')]) return null;
+
   return (
     <Field name={name} rules={mergedRules} initialValue={schema.default} {...rest}>
       {(control, meta, form) => {

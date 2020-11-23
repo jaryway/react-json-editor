@@ -19,7 +19,7 @@ const CheckboxEditor: React.FC<CheckboxEditorProps> = ({ schema, path, title }) 
   // }, []);
 
   return (
-    <LabelField name={fieldpath} label={title} schema={schema} valuePropName='checked' dependencies={[]}>
+    <LabelField name={fieldpath} label={title} schema={schema} valuePropName='checked'>
       {(control, meta) => {
         return <Checkbox {...control} id={meta.name.join('.')} />;
       }}

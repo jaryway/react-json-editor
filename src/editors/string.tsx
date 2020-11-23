@@ -24,7 +24,7 @@ const StringEditor: React.FC<StringEditorProps> = ({ path, title, schema }) => {
   }, []);
 
   return (
-    <LabelField name={fieldpath} label={title} initialValue={schema.default} schema={schema}>
+    <LabelField name={fieldpath} label={title} schema={schema}>
       {(control, meta) => {
         return <Input {...control} data-schemapath={meta.name.join('.')} />;
       }}

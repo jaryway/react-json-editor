@@ -7,3 +7,4 @@ export { default as radio } from './radio';
 export { default as multiselect } from './multiselect';
 export { default as object } from './object';
 export { default as array } from './array';
+export { default as hidden } from './hidden';
